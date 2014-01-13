@@ -1,0 +1,5 @@
+package com.m_mb.mm;
+
+public @interface PrimaryKey {
+
+}

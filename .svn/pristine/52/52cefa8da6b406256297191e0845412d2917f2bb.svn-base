@@ -1,0 +1,85 @@
+package com.m_mb.mm.ws;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+
+import com.m_mb.mm.DataParameter;
+
+public class WS {
+	private static void SetInt(Object object, Object value, Field field) {
+		try {
+			Integer intValue = Integer.parseInt(value.toString());
+			field.set(object, intValue);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void SetString(Object object, Object value, Field field) {
+		try {
+			field.set(object, value);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private static List<Field> GetDPFieldsOnly(Field[] sFields) {
+		List<Field> list = new ArrayList<Field>();
+		for (Field field : sFields) {
+			Annotation[] annotations = field.getDeclaredAnnotations();
+			boolean isDataParameter = false;
+			for (Annotation a : annotations) {
+				if (a instanceof DataParameter)
+					isDataParameter = true;
+			}
+			if (isDataParameter)
+				list.add(field);
+		}
+		return list;
+	}
+	
+
+	
+	@SuppressWarnings({ "unchecked" })
+	public static <T> List<T> ReadCollection(Class<T> type, SoapSerializationEnvelope envelope) throws Exception {
+		Object obj = envelope.getResponse();
+		List<T> tList = new ArrayList<T>();
+		List<Field> objFields = GetDPFieldsOnly(type.getFields());
+		if (obj.getClass() == Vector.class) {
+			Vector<SoapObject> collection = (Vector<SoapObject>)obj;
+			for (SoapObject result : collection) {
+				T nObj = type.newInstance();
+				for (Field field : objFields) {
+					
+					if (field.getType() == String.class) {
+						SetString(nObj, result.getProperty(field.getName()), field);	
+					} else if (field.getType() == int.class) {
+						SetInt(nObj,  result.getProperty(field.getName()), field);
+					}
+					tList.add(nObj);
+				}
+			}
+		} else {
+			SoapObject result = (SoapObject)obj;
+			T nObj = type.newInstance();
+			for (Field field : objFields) {
+				Class<?> fieldType = field.getType();
+				if (fieldType == String.class) {
+					SetString(nObj, result.getProperty(field.getName()), field);	
+				} else if (fieldType == int.class) {
+					SetInt(nObj,  result.getProperty(field.getName()), field);
+				}
+			}
+			tList.add(nObj);
+		}
+		return tList;
+	}
+}
