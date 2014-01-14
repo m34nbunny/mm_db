@@ -13,8 +13,9 @@ your properties with some annotations. The following annotations are available, 
 Step 1.) Name your properties the exact same name as they are in the DB.
 
 Step 2.) Decorate your properties with the following annotations. 
-     @PrimaryKey - Obviously represents the primary key of the object you are storing in your db.
-     @DataParameter - Is any other field type in your database that relates to your object.
+
+	@PrimaryKey - Obviously represents the primary key of the object you are storing in your db.
+	@DataParameter - Is any other field type in your database that relates to your object.
 
 Step 3.) Add an interface that contains strings. The strings should be set to the names of the stored procedures you want to call.
 
@@ -60,12 +61,11 @@ An example class is below
 
 In order to use the library instantiate a new DB object like so.
 
-     DB db = new DB(server, database, username, password);
-     -----------------------------------------------------
+	DB db = new DB(server, database, username, password);
+
 or
 
-     DB db = new DB(server, database, username, password, "3306");
-     -------------------------------------------------------------
+	DB db = new DB(server, database, username, password, "3306");
 
 
 In order to make a call on a stored procedure and have it cast into a result set, do the following.

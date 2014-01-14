@@ -61,18 +61,16 @@ An example class is below
 
 In order to use the library instantiate a new DB object like so.
 
-     DB db = new DB(server, database, username, password);
-     -----------------------------------------------------
+	DB db = new DB(server, database, username, password);
+
 or
 
-     DB db = new DB(server, database, username, password, "3306");
-     -------------------------------------------------------------
+	DB db = new DB(server, database, username, password, "3306");
 
 
 In order to make a call on a stored procedure and have it cast into a result set, do the following.
 
-     List<User> users = db.ReadCollection(User.class, User.Procedures.User_Get_All);
-     -------------------------------------------------------------------------------
+	List<User> users = db.ReadCollection(User.class, User.Procedures.User_Get_All);
 
 
 
