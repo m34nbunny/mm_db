@@ -239,13 +239,12 @@ public class DB {
     	statement.execute();
 	}
 	
+	@SuppressWarnings("unused")
 	public <T> void Remove(T data, String Procedure) throws IllegalArgumentException, IllegalAccessException {
 		Field[] properties = data.getClass().getFields();
     	for (int i = 0; i < properties.length;i++) {
     		String propertyName = properties[i].getName();
     		Object value = properties[i].get(data);
-    		System.out.println(value.toString());
-    		System.out.println(propertyName);
     	}
 	}
 	
