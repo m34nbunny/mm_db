@@ -29,6 +29,11 @@ public class DB {
 		ConnectionString = "jdbc:mysql://" + server + ":" + port + "/" + database + "?" + "user=" + username + "&password=" + password; 
 	}
 	
+	public DB(String server, String database, String username, String password) {
+		String port = "3306";
+		ConnectionString = "jdbc:mysql://" + server + ":" + port + "/" + database + "?" + "user=" + username + "&password=" + password; 
+	}
+	
 	//endregion
 	
 	//region Helpers...
