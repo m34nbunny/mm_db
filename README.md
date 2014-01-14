@@ -7,8 +7,8 @@ Instructions:
 -------------
 To start off let's talk about how this library works. In order to bind data to an object from a result set 
 we require you to name your columns in your database exactly the same as your properties in your object. 
-The library will not work if you don't perform this crucial step first. Next let's talk about decorating 
-your properties with some annotations. The following annotations are available, @PrimaryKy and @DataParameter
+The library will not work if you don't perform this crucial step first. Also, we require the use of two annotations
+provided by mm_db called, @PrimaryKey and @DataParameter
 
 Step 1.) Name your properties the exact same name as they are in the DB.
 
