@@ -13,8 +13,9 @@ your properties with some annotations. The following annotations are available, 
 Step 1.) Name your properties the exact same name as they are in the DB.
 
 Step 2.) Decorate your properties with the following annotations. 
-     @PrimaryKey - Obviously represents the primary key of the object you are storing in your db.
-     @DataParameter - Is any other field type in your database that relates to your object.
+
+	@PrimaryKey - Obviously represents the primary key of the object you are storing in your db.
+	@DataParameter - Is any other field type in your database that relates to your object.
 
 Step 3.) Add an interface that contains strings. The strings should be set to the names of the stored procedures you want to call.
 

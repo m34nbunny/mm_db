@@ -55,7 +55,7 @@ An example class is below
 			String User_Get_By_UserID = "User_Get_By_UserID";
 			String User_Remove_By_UserID = "User_Remove_By_UserID";
 		}
-	 }
+	}
 
 
 In order to use the library instantiate a new DB object like so.
